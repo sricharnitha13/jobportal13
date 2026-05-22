@@ -9,6 +9,8 @@ import org.springframework.http.HttpMethod;
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
+import org.springframework.security.config.http.SessionCreationPolicy;
+
 import org.springframework.security.web.SecurityFilterChain;
 
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -18,20 +20,32 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(
+
             HttpSecurity http
+
     ) throws Exception {
 
         http
 
-                // CORS
-
-                .cors(cors -> {})
-
-                // DISABLE CSRF
+                // 🚀 DISABLE CSRF
 
                 .csrf(csrf -> csrf.disable())
 
-                // ROUTES
+                // 🚀 ENABLE CORS
+
+                .cors(cors -> {})
+
+                // 🚀 STATELESS JWT
+
+                .sessionManagement(session ->
+
+                        session.sessionCreationPolicy(
+
+                                SessionCreationPolicy.STATELESS
+                        )
+                )
+
+                // 🚀 ROUTES
 
                 .authorizeHttpRequests(auth -> auth
 
@@ -41,28 +55,38 @@ public class SecurityConfig {
 
                                 "/auth/**",
 
-                                "/admin/**",
+                                "/jobs/recommended",
 
-                                "/profile/**",
-
-                                "/applications/**"
+                                "/profile/**"
 
                         ).permitAll()
 
                         // PUBLIC GET JOBS
 
                         .requestMatchers(
+
                                 HttpMethod.GET,
+
                                 "/jobs/**"
+
                         ).permitAll()
+
+                        // APPLICATION ROUTES
+
+                        .requestMatchers(
+
+                                "/applications/**"
+
+                        ).authenticated()
 
                         // EVERYTHING ELSE
 
-                        .anyRequest().authenticated()
+                        .anyRequest()
 
+                        .authenticated()
                 )
 
-                // JWT FILTER
+                // 🚀 JWT FILTER
 
                 .addFilterBefore(
 

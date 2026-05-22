@@ -1,140 +1,220 @@
 import { useNavigate } from "react-router-dom";
+
 function RecentApplications({
 
   appliedJobs
 
 }) {
-const navigate = useNavigate();
-  const statuses = [
 
-    "Interview",
-    "In Review",
-    "Rejected"
-
-  ];
+  const navigate = useNavigate();
 
   const badgeClasses = {
 
-    Interview:
-      "bg-success-subtle text-success",
+    APPLIED:
+      "bg-primary-subtle text-primary",
 
-    "In Review":
+    IN_REVIEW:
       "bg-warning-subtle text-warning",
 
-    Rejected:
-      "bg-danger-subtle text-danger"
+    INTERVIEW:
+      "bg-success-subtle text-success",
+
+    REJECTED:
+      "bg-danger-subtle text-danger",
+
+    SELECTED:
+      "bg-info-subtle text-info"
   };
 
   return (
 
     <div
-      className="card border-0 shadow-sm p-4 mt-5"
+      className="
+        card
+        border-0
+        shadow-sm
+        p-4
+        mt-5
+      "
       style={{
         borderRadius: "20px"
       }}
     >
 
-      <div className="d-flex justify-content-between align-items-center mb-4">
+      {/* HEADER */}
+
+      <div className="
+        d-flex
+        justify-content-between
+        align-items-center
+        mb-4
+      ">
 
         <h6 className="fw-bold">
+
           RECENT APPLICATIONS
+
         </h6>
 
-        <span
-          className="text-primary"
-          style={{
-            cursor: "pointer"
-          }}
+        <button
+
+          className="
+            btn
+            btn-link
+            text-decoration-none
+            fw-semibold
+            p-0
+          "
+
+          onClick={() =>
+            navigate("/applications")
+          }
         >
-          <button
 
-  className="
-    btn
-    btn-link
-    text-decoration-none
-    fw-semibold
-    p-0
-  "
+          See all →
 
-  onClick={() =>
-    navigate("/applications")
-  }
->
-  See all →
-</button>
-        </span>
+        </button>
 
       </div>
+
+      {/* EMPTY */}
 
       {appliedJobs.length === 0 ? (
 
         <p className="text-muted">
+
           No applications yet
+
         </p>
 
       ) : (
 
-        appliedJobs.map((job, index) => {
-
-          const status =
-            statuses[
-              index % statuses.length
-            ];
-
-          return (
+        appliedJobs
+          .slice(0, 3)
+          .map((job, index) => (
 
             <div
+
               key={job.id}
+
               className={`py-3 ${
-                index !== appliedJobs.length - 1
+                index !==
+                appliedJobs.length - 1
                   ? "border-bottom"
                   : ""
               }`}
             >
 
-              <div className="d-flex justify-content-between align-items-center">
+              <div className="
+                d-flex
+                justify-content-between
+                align-items-center
+              ">
 
-                <div className="d-flex align-items-center gap-3">
+                {/* LEFT */}
+
+                <div className="
+                  d-flex
+                  align-items-center
+                  gap-3
+                ">
+
+                  {/* COMPANY ICON */}
 
                   <div
-                    className="bg-light rounded-circle d-flex justify-content-center align-items-center"
+
+                    className="
+                      bg-light
+                      rounded-circle
+                      d-flex
+                      justify-content-center
+                      align-items-center
+                    "
+
                     style={{
-                      width: "40px",
-                      height: "40px",
-                      fontWeight: "bold"
+                      width: "42px",
+                      height: "42px",
+                      fontWeight: "bold",
+                      fontSize: "16px"
                     }}
                   >
-                    {job.company.charAt(0)}
+
+                    {(
+                      job.company ||
+                      job.title ||
+                      "A"
+                    )
+                      .charAt(0)
+                      .toUpperCase()}
+
                   </div>
+
+                  {/* INFO */}
 
                   <div>
 
+                    {/* COMPANY */}
+
                     <div className="fw-bold">
-                      {job.title}
+
+                      {job.company || "Company"}
+
                     </div>
 
-                    <small className="text-muted">
-                      Applied recently
+                    {/* LOCATION */}
+
+                    <small className="text-muted d-block">
+
+                      {job.location || "Location"}
+
                     </small>
+
+                    {/* MATCH PERCENTAGE */}
+
+                    <div
+                      className="
+                        small
+                        text-success
+                        fw-semibold
+                        mt-1
+                      "
+                    >
+
+                      ⭐ {job.matchPercentage || 85}% Match
+
+                    </div>
 
                   </div>
 
                 </div>
 
+                {/* STATUS */}
+
                 <span
-                  className={`badge ${badgeClasses[status]}`}
+
+                  className={`
+                    badge
+                    ${
+                      badgeClasses[
+                        job.status
+                      ] ||
+                      "bg-secondary"
+                    }
+                  `}
                 >
-                  {status}
+
+                  {job.status || "APPLIED"}
+
                 </span>
 
               </div>
 
             </div>
-          );
-        })
+          ))
       )}
 
     </div>
+
   );
 }
 

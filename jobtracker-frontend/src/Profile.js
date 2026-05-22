@@ -159,26 +159,100 @@ function Profile() {
       ]);
     }
   };
+  
   const [profileCompletion, setProfileCompletion] =
   useState(0);
   const navigate = useNavigate();
- const saveProfile = () => {
+  
+ const saveProfile = async () => {
 
-  localStorage.setItem(
-    "skills",
-    JSON.stringify(skills)
-  );
-  if (resume) {
+  try {
 
-  localStorage.setItem(
-    "resumeName",
-    resume.name
-  );
-}
+    const token =
+      localStorage.getItem("token");
+
+    const formData =
+      new FormData();
+
+    // 🔥 PROFILE DATA
+
+    formData.append(
+      "bio",
+      "Passionate developer"
+    );
+
+    formData.append(
+      "skills",
+      skills.join(", ")
+    );
+
+    formData.append(
+      "interests",
+      selectedInterests.join(", ")
+    );
+
+    formData.append(
+      "preferredRole",
+      "Full Stack Developer"
+    );
+
+    formData.append(
+      "preferredLocation",
+      "Hyderabad"
+    );
+
+    formData.append(
+      "experience",
+      "Fresher"
+    );
+
+    // 🔥 RESUME
+
+    if (resume) {
+
+      formData.append(
+        "resume",
+        resume
+      );
+    }
+
+    // 🔥 API CALL
+
+    const res = await fetch(
+
+      "http://localhost:9090/profile",
+
+      {
+        method: "POST",
+
+        headers: {
+          Authorization:
+            "Bearer " + token
+        },
+
+        body: formData
+      }
+    );
+
+    const data =
+      await res.text();
+
+    alert(data);
+
+    navigate("/dashboard");
+
+  } catch (err) {
+
+    console.log(err);
+
+    alert(
+      "Failed to save profile"
+    );
+  }
+};
  // alert("Profile saved successfully");
 
-  navigate("/dashboard");
-};
+
   return (
 
     <div

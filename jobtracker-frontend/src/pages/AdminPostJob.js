@@ -42,6 +42,11 @@ function AdminPostJob() {
     });
   };
 
+  const [requiredSkills,
+setRequiredSkills]
+
+= useState("");
+
   const handleSubmit =
     async (e) => {
 
@@ -66,7 +71,13 @@ function AdminPostJob() {
                 "Bearer " + token
             },
 
-            body: JSON.stringify(job)
+            body: JSON.stringify({
+
+  ...job,
+
+  requiredSkills
+
+})
 
           }
         );
@@ -100,7 +111,8 @@ function AdminPostJob() {
     };
 
   return (
-
+     
+     
     <div
       className="
         d-flex
@@ -384,7 +396,64 @@ function AdminPostJob() {
               />
 
             </div>
+     {/* REQUIRED SKILLS */}
 
+<div className="mb-5">
+
+  <label
+    className="
+      fw-semibold
+      d-flex
+      align-items-center
+      gap-2
+      mb-3
+    "
+    style={{
+      fontSize: "22px"
+    }}
+  >
+
+    <Briefcase
+      size={22}
+      color="#5b5df0"
+    />
+
+    Required Skills
+
+  </label>
+
+  <input
+
+    type="text"
+
+    className="form-control"
+
+    placeholder="
+      React, Java, MySQL
+    "
+
+    value={requiredSkills}
+
+    onChange={(e) =>
+      setRequiredSkills(
+        e.target.value
+      )
+    }
+
+    style={{
+
+      height: "72px",
+
+      borderRadius: "18px",
+
+      fontSize: "20px",
+
+      padding: "20px"
+
+    }}
+  />
+
+</div>
             {/* DESCRIPTION */}
 
             <div className="mb-2">

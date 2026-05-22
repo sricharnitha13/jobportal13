@@ -1,6 +1,10 @@
 package com.charni.jobtracker.model;
 
 import jakarta.persistence.*;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+
+import com.charni.jobtracker.enums.ApplicationStatus;
 
 @Entity
 public class Application {
@@ -13,8 +17,16 @@ public class Application {
 
     private String username;
 
-    // 🔥 RESUME FILE NAME
     private String resume;
+
+    private java.time.LocalDate interviewDate;
+
+    private String interviewTime;
+
+    private String interviewMode;
+
+    @Enumerated(EnumType.STRING)
+    private ApplicationStatus status;
 
     public Long getId() {
         return id;
@@ -29,7 +41,6 @@ public class Application {
     }
 
     public void setJobId(Long jobId) {
-
         this.jobId = jobId;
     }
 
@@ -47,5 +58,42 @@ public class Application {
 
     public void setResume(String resume) {
         this.resume = resume;
+    }
+
+    public ApplicationStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ApplicationStatus status) {
+        this.status = status;
+    }
+    public java.time.LocalDate getInterviewDate() {
+        return interviewDate;
+    }
+
+    public void setInterviewDate(
+            java.time.LocalDate interviewDate
+    ) {
+        this.interviewDate = interviewDate;
+    }
+
+    public String getInterviewTime() {
+        return interviewTime;
+    }
+
+    public void setInterviewTime(
+            String interviewTime
+    ) {
+        this.interviewTime = interviewTime;
+    }
+
+    public String getInterviewMode() {
+        return interviewMode;
+    }
+
+    public void setInterviewMode(
+            String interviewMode
+    ) {
+        this.interviewMode = interviewMode;
     }
 }

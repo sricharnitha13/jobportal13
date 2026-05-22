@@ -3,6 +3,7 @@ package com.charni.jobtracker.controller;
 import com.charni.jobtracker.dto.ApiResponse;
 import com.charni.jobtracker.dto.JobDTO;
 import com.charni.jobtracker.dto.JobResponseDTO;
+import com.charni.jobtracker.dto.JobWithCountDTO;
 import com.charni.jobtracker.model.Job;
 import com.charni.jobtracker.repository.ApplicationRepository;
 import com.charni.jobtracker.repository.JobRepository;
@@ -15,6 +16,8 @@ import org.springframework.security.core.Authentication;
 import java.util.List;
 import com.charni.jobtracker.repository.UserProfileRepository;
 import com.charni.jobtracker.model.UserProfile;
+import com.charni.jobtracker.enums.ApplicationStatus;
+
 @RestController
 @RequestMapping("/jobs")
 @CrossOrigin(origins = "http://localhost:3000")
@@ -38,94 +41,81 @@ public class JobController {
         this.jobRepository = jobRepository;
     }
     @GetMapping("/recommended")
+
     public List<Job> getRecommendedJobs(
+
             Authentication auth
+
     ) {
 
         if (auth == null) {
+
             return jobService.getAllJobs();
         }
 
-        String username = auth.getName();
+        String username =
+                auth.getName();
 
         UserProfile profile =
+
                 userProfileRepository
                         .findByUsername(username)
                         .orElse(null);
 
-        List<Job> jobs = jobService.getAllJobs();
+        List<Job> jobs =
+                jobService.getAllJobs();
+
+        // 🚀 NO PROFILE
 
         if (profile == null) {
+
+            for (Job job : jobs) {
+
+                job.setMatchPercentage(0);
+            }
+
             return jobs;
         }
 
-        String skills =
-                profile.getSkills() == null
-                        ? ""
-                        : profile.getSkills().toLowerCase();
+        // 🚀 AI MATCHING
 
-        String preferredRole =
-                profile.getPreferredRole() == null
-                        ? ""
-                        : profile.getPreferredRole().toLowerCase();
+        int match;
+        for (Job job : jobs) {
 
-        return jobs.stream()
+            match = calculateMatchPercentage(
 
-                .map(job -> {
+                    profile.getSkills(),
 
-                    int score = 0;
+                    job.getRequiredSkills()
+            );
 
-                    String title =
-                            job.getTitle().toLowerCase();
 
-                    String desc =
-                            job.getDescription().toLowerCase();
+            job.setMatchPercentage(match);
 
-                    if (
-                            title.contains(preferredRole)
-                    ) {
-                        score += 50;
-                    }
+            System.out.println(
 
-                    if (
-                            skills.contains("react")
-                                    &&
-                                    desc.contains("react")
-                    ) {
-                        score += 20;
-                    }
+                    job.getTitle()
 
-                    if (
-                            skills.contains("java")
-                                    &&
-                                    desc.contains("java")
-                    ) {
-                        score += 20;
-                    }
+                            + " -> "
 
-                    if (
-                            skills.contains("spring")
-                                    &&
-                                    desc.contains("spring")
-                    ) {
-                        score += 20;
-                    }
+                            + match
+            );
+        }
 
-                    if (score > 100) {
-                        score = 100;
-                    }
+        // 🚀 SORT HIGHEST MATCH FIRST
 
-                    job.setMatchScore(score);
+        jobs.sort(
 
-                    return job;
-                })
+                (a, b) ->
 
-                .sorted((a, b) ->
-                        b.getMatchScore()
-                                - a.getMatchScore()
-                )
+                        b.getMatchPercentage()
 
-                .toList();
+                                - a.getMatchPercentage()
+        );
+
+        return jobs;
+
+
     }
 
 
@@ -155,6 +145,7 @@ public class JobController {
     ) {
 
         final String username;
+
         if (auth != null) {
             username = auth.getName();
         } else {
@@ -166,20 +157,25 @@ public class JobController {
         return jobs.stream().map(job -> {
 
             long count =
-                    applicationRepository
-                            .countByJobId(job.getId());
+                    applicationRepository.countByJobId(job.getId());
 
-            boolean applied = false;
+            ApplicationStatus status = null;
 
             if (!username.isEmpty()) {
 
-                applied =
-                        applicationRepository
-                                .findByUsernameAndJobId(
-                                        username,
-                                        job.getId()
-                                )
-                                .isPresent();
+                var optionalApplication =
+                        applicationRepository.findByUsernameAndJobId(
+                                username,
+                                job.getId()
+                        );
+
+                if (optionalApplication.isPresent()) {
+
+                    status =
+                            optionalApplication
+                                    .get()
+                                    .getStatus();
+                }
             }
 
             return new JobResponseDTO(
@@ -189,7 +185,7 @@ public class JobController {
                     job.getLocation(),
                     job.getDescription(),
                     count,
-                    applied
+                    status
             );
 
         }).collect(java.util.stream.Collectors.toList());
@@ -215,5 +211,71 @@ public class JobController {
                 .findById(id)
 
                 .orElseThrow();
+    }
+    private int calculateMatchPercentage(
+
+            String userSkills,
+
+            String requiredSkills
+
+    ) {
+
+        if (
+
+                userSkills == null ||
+
+                        requiredSkills == null ||
+
+                        userSkills.isEmpty() ||
+
+                        requiredSkills.isEmpty()
+        ) {
+
+            return 0;
+        }
+
+        String[] userArray =
+
+                userSkills
+                        .toLowerCase()
+                        .split(",");
+
+        String[] requiredArray =
+
+                requiredSkills
+                        .toLowerCase()
+                        .split(",");
+
+        int matched = 0;
+
+        for (String required :
+                requiredArray) {
+
+            for (String user :
+                    userArray) {
+
+                if (
+
+                        user.trim()
+                                .equals(
+
+                                        required.trim()
+                                )
+                ) {
+
+                    matched++;
+
+                    break;
+                }
+            }
+        }
+
+        return (int)
+
+                (((double) matched /
+
+                        requiredArray.length)
+
+                        * 100);
     }
 }

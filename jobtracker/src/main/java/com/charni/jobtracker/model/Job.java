@@ -27,6 +27,9 @@ public class Job {
     @Transient
     private long applications;
     private String skills;
+    private String requiredSkills;
+    @Transient
+    private int matchPercentage;
 
     public Job() {}
 
@@ -45,13 +48,7 @@ public class Job {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    public int getMatchScore() {
-        return matchScore;
-    }
 
-    public void setMatchScore(int matchScore) {
-        this.matchScore = matchScore;
-    }
     public String getSkills() {
         return skills;
     }
@@ -65,5 +62,21 @@ public class Job {
 
     public void setApplications(long applications) {
         this.applications = applications;
+    }
+    public void setRequiredSkills(String requiredSkills) {
+        this.requiredSkills = requiredSkills;
+    }
+    public int getMatchPercentage() {
+        return matchPercentage;
+    }
+    public String getRequiredSkills() {
+        return requiredSkills;
+    }
+
+    public void setMatchPercentage(
+            int matchPercentage
+    ) {
+        this.matchPercentage =
+                matchPercentage;
     }
 }

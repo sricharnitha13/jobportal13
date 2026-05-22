@@ -1,28 +1,28 @@
-function StatsCards() {
+function StatsCards({ stats }) {
 
-  const stats = [
+  const cards = [
 
     {
       title: "Applied",
-      value: 12,
+      value: stats.applied,
       color: "#3b82f6"
     },
 
     {
       title: "In Review",
-      value: 5,
+      value: stats.inReview,
       color: "#f59e0b"
     },
 
     {
       title: "Interviews",
-      value: 2,
+      value: stats.interviews,
       color: "#10b981"
     },
 
     {
-      title: "Saved",
-      value: 8,
+      title: "Selected",
+      value: stats.selected,
       color: "#8b5cf6"
     }
 
@@ -32,7 +32,7 @@ function StatsCards() {
 
     <div className="row g-3">
 
-      {stats.map((stat, index) => (
+      {cards.map((card, index) => (
 
         <div
           className="col-md-3"
@@ -40,22 +40,36 @@ function StatsCards() {
         >
 
           <div
-            className="card border-0 shadow-sm p-4"
+            className="
+              card
+              border-0
+              shadow-sm
+              p-4
+              h-100
+            "
             style={{
               borderRadius: "20px"
             }}
           >
 
-            <div className="d-flex justify-content-between align-items-center">
+            <div className="
+              d-flex
+              justify-content-between
+              align-items-center
+            ">
 
               <div>
 
                 <small className="text-muted">
-                  {stat.title}
+
+                  {card.title}
+
                 </small>
 
                 <h3 className="fw-bold mt-2">
-                  {stat.value}
+
+                  {card.value}
+
                 </h3>
 
               </div>
@@ -65,7 +79,7 @@ function StatsCards() {
                   width: "14px",
                   height: "14px",
                   borderRadius: "50%",
-                  background: stat.color
+                  background: card.color
                 }}
               />
 

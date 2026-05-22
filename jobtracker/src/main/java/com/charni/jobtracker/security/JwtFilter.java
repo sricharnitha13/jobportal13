@@ -22,7 +22,23 @@ public class JwtFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
-        String path = request.getServletPath();
+        String path = request.getServletPath();if (
+
+                path.equals(
+                        "/jobs/recommended"
+                )
+
+        ) {
+
+            filterChain.doFilter(
+                    request,
+                    response
+            );
+
+            return;
+        }
+
+
 
         // 🔥 VERY IMPORTANT: skip ALL auth endpoints
         if (path.startsWith("/auth")) {

@@ -1,4 +1,5 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation
+} from "react-router-dom";
 
 function Sidebar({
 
@@ -8,6 +9,7 @@ function Sidebar({
 }) {
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const role =
     localStorage.getItem("role");
@@ -303,41 +305,87 @@ function Sidebar({
                 mt-3
               ">
 
-                <button
+               <button
 
-                  className="
-                    btn
-                    text-start
-                    py-2
-                    rounded-3
-                    border-0
-                    text-white
-                  "
+  className="
+    btn
+    text-white
+    w-100
+    text-start
+    py-3
+    px-4
+    mb-3
+  "
 
-                  style={{
-                    background: "#1f2937"
-                  }}
-                >
-                  ➕ Post Jobs
-                </button>
+  style={{
 
-                <button
+    background:
 
-                  className="
-                    btn
-                    text-start
-                    py-2
-                    rounded-3
-                    border-0
-                    text-white
-                  "
+      location.pathname ===
+      "/admin/post-job"
 
-                  style={{
-                    background: "#1f2937"
-                  }}
-                >
-                  👥 Manage Users
-                </button>
+        ? "rgba(255,255,255,0.1)"
+
+        : "rgba(255,255,255,0.04)",
+
+    borderRadius: "14px",
+
+    border: "none",
+
+    fontWeight: "500"
+  }}
+
+  onClick={() =>
+    navigate("/admin/post-job")
+  }
+>
+
+  ➕ Post Jobs
+
+</button>
+                 
+                 <li className="mb-3">
+
+  <button
+
+    className="
+      btn
+      text-white
+      w-100
+      text-start
+      py-3
+      px-4
+    "
+
+    style={{
+
+      background:
+        location.pathname ===
+        "/admin/manage-jobs"
+
+          ? "rgba(255,255,255,0.1)"
+
+          : "rgba(255,255,255,0.04)",
+
+      borderRadius: "14px",
+
+      border: "none",
+
+      fontWeight: "500"
+    }}
+
+    onClick={() =>
+      navigate("/admin/manage-jobs")
+    }
+  >
+
+    🛠 Manage Jobs
+
+  </button>
+
+</li>
+
+                
 
               </div>
 

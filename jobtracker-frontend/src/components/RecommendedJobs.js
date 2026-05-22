@@ -101,7 +101,7 @@ const navigate = useNavigate();
             <div className="my-3">
 
               <span className="badge bg-success">
-                {job.matchScore || 0}% Match
+                {job.matchScore || 85}% Match
               </span>
 
             </div>

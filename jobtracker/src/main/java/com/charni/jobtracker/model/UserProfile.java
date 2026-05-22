@@ -1,6 +1,7 @@
 package com.charni.jobtracker.model;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Column;
 
 @Entity
 public class UserProfile {
@@ -8,7 +9,7 @@ public class UserProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(unique = true)
     private String username;
 
     @Column(length = 1000)

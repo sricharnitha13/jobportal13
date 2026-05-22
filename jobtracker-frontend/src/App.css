@@ -36,3 +36,30 @@
     transform: rotate(360deg);
   }
 }
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+}
+
+.APPLIED {
+    background: #3498db;
+}
+
+.IN_REVIEW {
+    background: #f39c12;
+}
+
+.INTERVIEW {
+    background: #9b59b6;
+}
+
+.SELECTED {
+    background: #2ecc71;
+}
+
+.REJECTED {
+    background: #e74c3c;
+}
