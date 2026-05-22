@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
 
   useEffect,
@@ -38,7 +39,7 @@ function RecommendedJobsPage() {
 
     fetchRecommendedJobs();
 
-  }, []);
+  }, [fetchRecommendedJobs]);
 
   const fetchRecommendedJobs =
     async () => {

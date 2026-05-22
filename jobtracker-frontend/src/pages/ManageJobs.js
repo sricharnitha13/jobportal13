@@ -245,7 +245,7 @@
 // }
 
 // export default ManageJobs;
-
+/* eslint-disable react-hooks/exhaustive-deps */
 
 import {
 
@@ -298,7 +298,7 @@ function ManageJobs() {
 
     fetchJobs();
 
-  }, []);
+  }, [ fetchJobs]);
 
   const fetchJobs =
     async () => {

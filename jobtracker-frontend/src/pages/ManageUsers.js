@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
 
   useEffect,
@@ -17,7 +19,7 @@ function ManageUsers() {
 
     fetchUsers();
 
-  }, []);
+  }, [fetchUsers]);
 
   const fetchUsers =
     async () => {
