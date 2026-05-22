@@ -26,7 +26,7 @@ function ManageUsers() {
 
         const res = await fetch(
 
-          "http://localhost:9090/admin/users",
+          "https://jobportal13.onrender.com/admin/users",
 
           {
             headers: {

@@ -37,7 +37,7 @@ function ExploreJobs() {
 
       const res = await fetch(
 
-        "http://localhost:9090/jobs",
+        "https://jobportal13.onrender.com/jobs",
 
         {
           headers: {
@@ -87,7 +87,7 @@ function ExploreJobs() {
 
     await fetch(
 
-      `http://localhost:9090/applications/${jobId}`,
+      `https://jobportal13.onrender.com/applications/${jobId}`,
 
       {
         method: "POST",

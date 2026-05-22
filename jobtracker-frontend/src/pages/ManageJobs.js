@@ -26,7 +26,7 @@
 
 //         const res = await fetch(
 
-//           "http://localhost:9090/jobs",
+//           "https://jobportal13.onrender.com/jobs",
 
 //           {
 //             headers: {
@@ -67,7 +67,7 @@
 
 //         await fetch(
 
-//           `http://localhost:9090/jobs/${id}`,
+//           `https://jobportal13.onrender.com/jobs/${id}`,
 
 //           {
 
@@ -309,7 +309,7 @@ function ManageJobs() {
 
         const res = await fetch(
 
-          "http://localhost:9090/jobs",
+          "https://jobportal13.onrender.com/jobs",
 
           {
             headers: {
@@ -345,7 +345,7 @@ function ManageJobs() {
 
         await fetch(
 
-          `http://localhost:9090/jobs/${selectedJobId}`,
+          `https://jobportal13.onrender.com/jobs/${selectedJobId}`,
 
           {
 

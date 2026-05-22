@@ -56,7 +56,7 @@ setRequiredSkills]
 
         const res = await fetch(
 
-          "http://localhost:9090/jobs",
+          "https://jobportal13.onrender.com/jobs",
 
           {
 

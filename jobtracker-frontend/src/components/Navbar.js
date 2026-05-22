@@ -38,7 +38,7 @@
 
 //         const res = await fetch(
 
-//           "http://localhost:9090/notifications",
+//           "https://jobportal13.onrender.com/notifications",
 
 //           {
 //             headers: {
@@ -407,7 +407,7 @@ function Navbar() {
   const fetchNotifications = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:9090/notifications", {
+      const res = await fetch("https://jobportal13.onrender.com/notifications", {
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -436,7 +436,7 @@ function Navbar() {
   const markAsRead = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await fetch(`http://localhost:9090/notifications/read/${id}`, {
+      await fetch(`https://jobportal13.onrender.com/notifications/read/${id}`, {
         method: "PUT",
         headers: {
           Authorization: "Bearer " + token,

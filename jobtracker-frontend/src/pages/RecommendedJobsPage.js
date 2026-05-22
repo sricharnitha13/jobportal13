@@ -47,7 +47,7 @@ function RecommendedJobsPage() {
 
         const res = await fetch(
 
-          "http://localhost:9090/jobs/recommended",
+          "https://jobportal13.onrender.com/jobs/recommended",
 
           {
 

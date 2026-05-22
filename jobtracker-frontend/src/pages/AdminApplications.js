@@ -53,7 +53,7 @@ function AdminApplications() {
 
         const res = await fetch(
 
-          "http://localhost:9090/applications/all",
+          "https://jobportal13.onrender.com/applications/all",
 
           {
             headers: {
@@ -95,7 +95,7 @@ function AdminApplications() {
 
         await fetch(
 
-          `http://localhost:9090/applications/${id}/status?status=${status}`,
+          `https://jobportal13.onrender.com/applications/${id}/status?status=${status}`,
 
           {
             method: "PUT",
@@ -124,7 +124,7 @@ function AdminApplications() {
 
         await fetch(
 
-`http://localhost:9090/applications/${selectedApp.id}/schedule?date=${interviewDate}&time=${interviewTime}&mode=${interviewMode}`,
+`https://jobportal13.onrender.com/applications/${selectedApp.id}/schedule?date=${interviewDate}&time=${interviewTime}&mode=${interviewMode}`,
 
           {
             method: "PUT",
@@ -311,7 +311,7 @@ function AdminApplications() {
 
     <a
 
-      href={`http://localhost:9090/applications/resume/${app.resume}`}
+      href={`https://jobportal13.onrender.com/applications/resume/${app.resume}`}
 
       target="_blank"
 
@@ -332,7 +332,7 @@ function AdminApplications() {
 
     <a
 
-      href={`http://localhost:9090/applications/resume/${app.resume}`}
+      href={`https://jobportal13.onrender.com/applications/resume/${app.resume}`}
 
       download
 

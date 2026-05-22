@@ -220,7 +220,7 @@ function Profile() {
 
     const res = await fetch(
 
-      "http://localhost:9090/profile",
+      "https://jobportal13.onrender.com/profile",
 
       {
         method: "POST",

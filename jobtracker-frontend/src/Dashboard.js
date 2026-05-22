@@ -77,7 +77,7 @@ const [
   // ─── USER: fetch personal stats ───────────────────────────────────────────
   const fetchStats = async () => {
     try {
-      const res = await fetch("http://localhost:9090/applications/stats", {
+      const res = await fetch("https://jobportal13.onrender.com/applications/stats", {
         headers: { Authorization: "Bearer " + token },
       });
       const data = await res.json();
@@ -90,7 +90,7 @@ const [
   // ─── USER: recent 3 applications ──────────────────────────────────────────
   const fetchRecentApplications = async () => {
     try {
-      const res = await fetch("http://localhost:9090/applications", {
+      const res = await fetch("https://jobportal13.onrender.com/applications", {
         headers: { Authorization: "Bearer " + token },
       });
       const data = await res.json();
@@ -103,7 +103,7 @@ const [
   // ─── USER: upcoming interviews ────────────────────────────────────────────
   const fetchUpcomingInterviews = async () => {
     try {
-      const res = await fetch("http://localhost:9090/applications", {
+      const res = await fetch("https://jobportal13.onrender.com/applications", {
         headers: { Authorization: "Bearer " + token },
       });
       const data = await res.json();
@@ -117,7 +117,7 @@ const [
   const fetchJobs = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:9090/jobs", {
+      const res = await fetch("https://jobportal13.onrender.com/jobs", {
         headers: token ? { Authorization: "Bearer " + token } : {},
       });
       const data = await res.json();
@@ -128,7 +128,7 @@ const [
       setAppliedJobs(applied);
 
       // Recommended jobs
-      const recRes = await fetch("http://localhost:9090/jobs/recommended", {
+      const recRes = await fetch("https://jobportal13.onrender.com/jobs/recommended", {
         headers: token ? { Authorization: "Bearer " + token } : {},
       });
       const recData = await recRes.json();
@@ -149,10 +149,10 @@ const [
     try {
       // Fetch both in parallel
       const [appsRes, jobsRes] = await Promise.all([
-        fetch("http://localhost:9090/applications/all", {
+        fetch("https://jobportal13.onrender.com/applications/all", {
           headers: { Authorization: "Bearer " + token },
         }),
-        fetch("http://localhost:9090/jobs", {
+        fetch("https://jobportal13.onrender.com/jobs", {
           headers: { Authorization: "Bearer " + token },
         }),
       ]);
@@ -225,7 +225,7 @@ const [
       return;
     }
     try {
-      await fetch(`http://localhost:9090/applications/${jobId}`, {
+      await fetch(`https://jobportal13.onrender.com/applications/${jobId}`, {
         method: "POST",
         headers: { Authorization: "Bearer " + token },
       });

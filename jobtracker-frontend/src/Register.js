@@ -61,7 +61,7 @@ function Register() {
 
         const res = await fetch(
 
-          "http://localhost:9090/auth/register",
+          "https://jobportal13.onrender.com/auth/register",
 
           {
 

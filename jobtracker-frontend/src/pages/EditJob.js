@@ -48,7 +48,7 @@ function EditJob() {
 
         const res = await fetch(
 
-          `http://localhost:9090/jobs/${id}`,
+          `https://jobportal13.onrender.com/jobs/${id}`,
 
           {
             headers: {
@@ -97,7 +97,7 @@ function EditJob() {
 
         await fetch(
 
-          `http://localhost:9090/jobs/${id}`,
+          `https://jobportal13.onrender.com/jobs/${id}`,
 
           {
 
