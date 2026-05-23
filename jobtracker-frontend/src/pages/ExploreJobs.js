@@ -75,7 +75,6 @@ function ExploreJobs() {
 
               <div className="d-flex justify-content-between align-items-center">
                 <small className="text-muted">{job.applications || 0} applicants</small>
-
                 <div className="d-flex gap-2">
                   {job.applied ? (
                     <button className="btn btn-success" disabled>Applied</button>
