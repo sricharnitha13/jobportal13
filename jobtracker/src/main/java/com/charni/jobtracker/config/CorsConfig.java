@@ -18,7 +18,7 @@ public class CorsConfig {
 
         config.setAllowedOrigins(List.of(
                 "http://localhost:3000",
-                "https://jobportal13.vercel.app",
+                "https://*.vercel.app",
                 "https://jobportal13-dpfd.vercel.app"
         ));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
