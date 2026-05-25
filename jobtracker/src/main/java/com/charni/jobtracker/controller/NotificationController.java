@@ -10,8 +10,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/notifications")
-@CrossOrigin(origins = {"http://localhost:3000",
-        "https://jobportal13-dpfd.vercel.app"})
+//@CrossOrigin(origins = {"http://localhost:3000",
+//        "https://jobportal13-dpfd.vercel.app"})
 public class NotificationController {
 
     private final NotificationRepository

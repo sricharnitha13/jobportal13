@@ -20,8 +20,8 @@ import com.charni.jobtracker.enums.ApplicationStatus;
 
 @RestController
 @RequestMapping("/jobs")
-@CrossOrigin(origins = {"http://localhost:3000",
-        "https://jobportal13-dpfd.vercel.app"})
+//@CrossOrigin(origins = {"http://localhost:3000",
+//        "https://jobportal13-dpfd.vercel.app"})
 public class JobController {
 
     private final JobService jobService;
