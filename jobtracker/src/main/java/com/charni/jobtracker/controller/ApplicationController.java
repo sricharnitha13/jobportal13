@@ -31,7 +31,8 @@ import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/applications")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000",
+        "https://jobportal13-dpfd.vercel.app"})
 public class ApplicationController {
 
     private final ApplicationRepository applicationRepository;

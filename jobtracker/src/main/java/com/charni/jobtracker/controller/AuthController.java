@@ -12,7 +12,8 @@ import org.springframework.http.HttpStatus;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000",
+        "https://jobportal13-dpfd.vercel.app"})
 public class AuthController {
 
     private final UserRepository userRepository;
