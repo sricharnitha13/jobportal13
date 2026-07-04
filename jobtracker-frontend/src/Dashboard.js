@@ -263,9 +263,20 @@ const [
         {/* NAVBAR */}
         <Navbar />
 
-        {error && <div className="alert alert-danger">{error}</div>}
-        {loading && <p>Loading...</p>}
-
+        {error && <div className="alert alert-danger rounded-pill">{error}</div>}
+        {loading ? (
+          <div className="row mt-4">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="col-md-3 mb-4">
+                <div className="card glass-card p-4 skeleton" style={{ height: "120px" }}></div>
+              </div>
+            ))}
+            <div className="col-12 mb-4">
+               <div className="card glass-card p-4 skeleton" style={{ height: "400px" }}></div>
+            </div>
+          </div>
+        ) : (
+          <>
         {/* ── USER DASHBOARD ── */}
         {role === "USER" && (
           <>
@@ -396,6 +407,8 @@ const [
                 </button>
               </div>
             </div>
+          </>
+        )}
           </>
         )}
 

@@ -1,5 +1,5 @@
-import { useNavigate,useLocation
-} from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 function Sidebar({
 
@@ -22,8 +22,11 @@ function Sidebar({
   };
 
   return (
-
-    <div
+    <AnimatePresence>
+    <motion.div
+      initial={{ x: -260 }}
+      animate={{ x: window.innerWidth < 992 && !sidebarOpen ? -260 : 0 }}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
 
       className="
         position-fixed
@@ -465,8 +468,8 @@ function Sidebar({
         </button>
 
       </div>
-
-    </div>
+    </motion.div>
+    </AnimatePresence>
   );
 }
 

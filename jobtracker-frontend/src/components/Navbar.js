@@ -392,11 +392,11 @@
 // export default Navbar;
 
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 function Navbar() {
   // 🔔 NOTIFICATIONS
   const [notifications, setNotifications] = useState([]);
-
   // 🔽 DROPDOWN STATE
   const [openNotifications, setOpenNotifications] = useState(false);
 
@@ -454,7 +454,10 @@ function Navbar() {
   };
 
   return (
-    <div
+    <motion.div
+      initial={{ y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.4 }}
       className="
         bg-white shadow-sm rounded-4 px-4 py-3 mb-4
         d-flex justify-content-between align-items-center position-relative
@@ -573,7 +576,7 @@ function Navbar() {
           />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
